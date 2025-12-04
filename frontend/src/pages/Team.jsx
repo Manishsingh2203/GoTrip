@@ -16,7 +16,7 @@ const Team = () => {
           <div className="bg-white border border-gray-200 rounded-2xl shadow-md px-8 py-8 sm:px-10 sm:py-10 max-w-md w-full text-center">
             <div className="h-40 w-40 sm:h-44 sm:w-44 mx-auto rounded-full mb-5 overflow-hidden bg-[#F7F7F7] flex items-center justify-center">
               <img
-                src="../../public/admin.jpeg"
+                src="/admin.jpeg"
                 alt="Team member"
                 className="h-full w-full object-cover"
               />
