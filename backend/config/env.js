@@ -43,18 +43,20 @@ if (error) {
 }
 
 // Validate required fields based on environment
+// Validate required fields based on environment
 if (envVars.NODE_ENV === 'production') {
   const productionSchema = Joi.object({
     JWT_ACCESS_SECRET: Joi.string().min(32).required(),
     JWT_REFRESH_SECRET: Joi.string().min(32).required(),
     MONGODB_URI: Joi.string().uri().required(),
-  });
+  }).unknown(true);   // <<< IMPORTANT
   
   const { error: productionError } = productionSchema.validate(envVars);
   if (productionError) {
     throw new Error(`Production config validation error: ${productionError.message}`);
   }
 }
+
 
 module.exports = {
   // Server
