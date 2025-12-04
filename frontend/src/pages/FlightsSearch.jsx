@@ -68,8 +68,8 @@ export default function FlightsSearch() {
             typeof f.stops === "number"
               ? f.stops
               : f.stops === "Non-stop"
-              ? 0
-              : Number(f.stops) || 1,
+                ? 0
+                : Number(f.stops) || 1,
           price_in_INR: Number(f.price_in_INR) || 0,
           original_price: Number(f.original_price) || Number(f.price_in_INR) * 1.2,
           baggage_limit: f.baggage_limit || "15 kg",
@@ -105,12 +105,11 @@ export default function FlightsSearch() {
   };
 
   useEffect(() => {
-    // If we arrived here from Home with pre-filled data,
-    // auto-run the search once so the user immediately sees results.
-    if (location.state && from && to && date) {
+    if (location.state?.from && location.state?.to && location.state?.date) {
       searchFlights(false);
     }
-  }, [location.state, from, to, date]);
+  }, []); // ⭐ Empty dependency array
+
 
   // Filter + Sort
   const filteredFlights = useMemo(() => {
@@ -460,7 +459,7 @@ export default function FlightsSearch() {
                       </div>
 
                       {/* RIGHT = PRICE */}
-                        <div className="w-full sm:w-32 flex flex-col justify-between items-end sm:items-end mt-4 sm:mt-0 shrink-0">
+                      <div className="w-full sm:w-32 flex flex-col justify-between items-end sm:items-end mt-4 sm:mt-0 shrink-0">
                         <div className="text-right">
                           <div className="text-[#767676] text-sm line-through">
                             ₹{flight.original_price}
