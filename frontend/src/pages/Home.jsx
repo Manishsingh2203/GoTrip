@@ -83,7 +83,7 @@ const Home = () => {
       id: 1,
       title: "Book Flights & Hotels",
       description: "Get best deals on flights, hotels, and holiday packages",
-      image: "../../public/home/home1.jpg",
+      image: "/home/home1.jpg",
       buttonText: "Explore Deals",
       buttonLink: "/explore-deals",
       badge: "FLAT 20% OFF",
@@ -94,14 +94,14 @@ const Home = () => {
       description: "Smart recommendations and personalized itineraries by AI",
       buttonText: "Plan Trip",
       buttonLink: "/plan-trip",
-      image: "../../public/home/home2.jpg",
+      image: "/home/home2.jpg",
       badge: "AI ASSISTANT",
     },
     {
       id: 3,
       title: "Discover Amazing Destinations",
       description: "Explore curated places with detailed guides and reviews",
-      image: "../../public/home/home3.jpg",
+      image: "/home/home3.jpg",
       buttonText: "View Destinations",
       buttonLink: "/places",
       badge: "TRENDING",
@@ -116,7 +116,7 @@ const Home = () => {
       price: "₹8,499",
       originalPrice: "₹12,999",
       discount: "35% OFF",
-      image: "../../public/topDeals/deals1.jpg",
+      image: "/topDeals/deals1.jpg",
       type: "hotel",
       duration: "3D/2N",
       rating: 4.5
@@ -127,7 +127,7 @@ const Home = () => {
       price: "₹12,999",
       originalPrice: "₹18,999",
       discount: "32% OFF",
-      image: "../../public/topDeals/deals2.jpg",
+      image: "/topDeals/deals2.jpg",
       type: "flight",
       duration: "Direct",
       rating: 4.3
@@ -138,7 +138,7 @@ const Home = () => {
       price: "₹5,999",
       originalPrice: "₹8,999",
       discount: "33% OFF",
-      image: "../../public/topDeals/deals3.jpg",
+      image: "/topDeals/deals3.jpg",
       type: "hotel",
       duration: "2D/1N",
       rating: 4.7
@@ -149,7 +149,7 @@ const Home = () => {
       price: "₹1,299",
       originalPrice: "₹1,899",
       discount: "32% OFF",
-      image: "../../public/topDeals/deals4.jpg",
+      image: "/topDeals/deals4.jpg",
       duration: "12h",
       rating: 4.2
     }
@@ -160,25 +160,25 @@ const Home = () => {
     { 
       name: "Goa", 
       country: "India", 
-      image: "../../public/trendingDestinations/destinations1.jpg", 
+      image: "/trendingDestinations/destinations1.jpg", 
       startingPrice: "₹4,999"
     },
     { 
       name: "Bangkok", 
       country: "Thailand", 
-      image: "../../public/trendingDestinations/destinations2.jpg", 
+      image: "/trendingDestinations/destinations2.jpg", 
       startingPrice: "₹12,999"
     },
     { 
       name: "Dubai", 
       country: "UAE", 
-      image: "../../public/trendingDestinations/destinations3.jpg", 
+      image: "/trendingDestinations/destinations3.jpg", 
       startingPrice: "₹24,999"
     },
     { 
       name: "Manali", 
       country: "India", 
-      image: "../../public/trendingDestinations/destinations4.jpg", 
+      image: "/trendingDestinations/destinations4.jpg", 
       startingPrice: "₹5,999"
     }
   ];

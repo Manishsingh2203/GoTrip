@@ -445,7 +445,7 @@ export default function HotelsSearch() {
                         {/* Hotel Image */}
                         <div className="relative flex-shrink-0 w-full sm:w-32 h-44 sm:h-32">
                           <img
-                            src={'../../public/hotel.png'}
+                            src={'/hotel.png'}
                             alt={hotel.name}
                             className="h-full w-full rounded-xl object-cover  shadow-sm"
                             style={{ filter: "hue-rotate(200deg) saturate(200%)" }}

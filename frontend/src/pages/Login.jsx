@@ -12,9 +12,9 @@ const Login = ({ onClose, onSwitchSignup }) => {
 
   const [currentImage, setCurrentImage] = useState(0);
   const images = [
-    "../../public/auth/auth1.jpg",
-    "../../public/auth/auth2.jpg",
-    "../../public/auth/auth3.jpg",
+    "/auth/auth1.jpg",
+    "/auth/auth2.jpg",
+    "/auth/auth3.jpg",
   ];
 
   useEffect(() => {
