@@ -1,0 +1,50 @@
+/* premium.css - simple modern styles for GoTrip premium UI */
+:root{
+  --bg:#0f172a;
+  --card:#ffffff;
+  --muted:#6b7280;
+  --accent:#2563eb;
+  --soft:#f8fafc;
+  --border:#e6e6e6;
+}
+
+body { font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; color:#0b1220; background: linear-gradient(180deg, #f7fbff 0%, #eef6ff 100%); }
+
+/* hero */
+.hero { padding:36px 20px; background: linear-gradient(90deg, rgba(37,99,235,0.12), rgba(99,102,241,0.06)); border-radius:12px; margin:20px auto; max-width:1200px; }
+.hero-inner { max-width:980px; margin:0 auto; text-align:left; }
+.hero-title { margin:0; font-size:28px; color:var(--bg); }
+.hero-sub { margin:6px 0 14px; color:var(--muted); }
+
+/* tabs */
+.tabs { display:inline-flex; gap:8px; margin-top:10px; }
+.tab-btn { padding:10px 18px; border-radius:999px; border:none; background:transparent; cursor:pointer; color:var(--muted); font-weight:600; }
+.tab-btn.active { background:var(--accent); color:white; box-shadow:0 6px 18px rgba(37,99,235,0.12); }
+
+/* main card */
+.card-panel { max-width:1200px; margin:20px auto; background:var(--card); border-radius:10px; box-shadow:0 8px 30px rgba(16,24,40,0.06); padding:18px; }
+.search-form .row { display:flex; gap:12px; align-items:center; }
+.input { padding:12px 14px; border-radius:10px; border:1px solid var(--border); min-width:150px; flex:1; }
+.btn-primary { background:var(--accent); color:white; border:none; padding:12px 16px; border-radius:10px; cursor:pointer; font-weight:700; }
+.btn-outline { border:1px solid var(--accent); color:var(--accent); padding:8px 12px; border-radius:10px; text-decoration:none; display:inline-block; }
+.btn-disabled { background:#f3f4f6; color:var(--muted); border-radius:8px; padding:8px 10px; }
+
+.error { color:#b91c1c; margin-top:10px; }
+.empty { color:var(--muted); padding:28px; text-align:center; }
+
+/* cards */
+.card { display:flex; justify-content:space-between; align-items:center; gap:12px; border-radius:10px; padding:12px; border:1px solid var(--border); margin-bottom:12px; background:white; }
+.card-left { display:flex; gap:12px; align-items:center; }
+.airline-circle { width:56px; height:56px; border-radius:10px; background:#eef2ff; display:flex; align-items:center; justify-content:center; font-weight:800; color:var(--accent); }
+.muted { color:var(--muted); font-size:13px; }
+.price { font-weight:800; font-size:20px; color:var(--bg); }
+.hotel-thumb { width:100px; height:72px; object-fit:cover; border-radius:8px; margin-right:14px; }
+.hotel-body { flex:1 }
+.hotel-right { display:flex; flex-direction:column; gap:8px; align-items:flex-end; }
+
+/* responsive */
+@media (max-width:900px) {
+  .search-form .row { flex-direction:column; align-items:stretch; }
+  .card { flex-direction:column; align-items:flex-start; }
+  .hotel-right { align-items:flex-start; }
+}
