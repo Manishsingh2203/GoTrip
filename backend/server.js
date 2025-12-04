@@ -37,35 +37,27 @@ const app = express();
 const allowedOrigins = [
   "http://localhost:3000",
   "http://127.0.0.1:3000",
-  process.env.FRONTEND_URL, // main Vercel URL
-  ...(process.env.ALLOWED_ORIGINS?.split(",") || [])
+  process.env.FRONTEND_URL   // Always use env for production
 ];
 
 app.use(cors({
-  origin: function (origin, callback) {
-    // Allow requests without origin (mobile apps, Postman, curl)
-    if (!origin) return callback(null, true);
+  origin: function(origin, callback) {
 
-    // If origin matches exactly any allowed domain
-    if (allowedOrigins.includes(origin)) {
+    if (!origin) return callback(null, true);  // mobile / postman
+
+    // Allow Vercel preview builds also:
+    if (allowedOrigins.includes(origin) || origin.endsWith(".vercel.app")) {
       return callback(null, true);
     }
 
-    // Allow Vercel preview URLs automatically
-    if (/https:\/\/go-trip-.*\.vercel\.app/.test(origin)) {
-      console.log("⚠️ Allowing Vercel Preview:", origin);
-      return callback(null, true);
-    }
-
-    // Otherwise block
     console.log("❌ Not allowed by CORS:", origin);
     return callback(new Error("Not allowed by CORS: " + origin), false);
   },
+
   credentials: true,
   allowedHeaders: ["Content-Type", "Authorization"],
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"]
 }));
-
 
 
 
@@ -211,7 +203,8 @@ const PORT = config.port || 5000;
 
 const server = app.listen(PORT, () => {
   console.log(`🚀 GoTrip AI Backend running in ${config.env} mode on port ${PORT}`);
-  console.log(`🌐 CORS enabled for: http://localhost:3000`);
+console.log("🌐 CORS allowed origins:", allowedOrigins);
+
   console.log(`📊 Rate limit: ${config.env === 'production' ? '100' : '1000'} requests per minute`);
   console.log(`🔐 Authentication: OTP + JWT with HttpOnly cookies`);
   console.log(`📧 Email service: Brevo API`);
