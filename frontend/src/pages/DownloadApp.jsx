@@ -32,6 +32,7 @@ const DownloadApp = () => {
       */
       await fetch(`${API}/notify`, {
         method: "POST",
+        credentials: "include", 
         headers: {
           "Content-Type": "application/json",
         },
