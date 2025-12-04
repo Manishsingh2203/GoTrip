@@ -2,7 +2,7 @@ const express = require('express');
 const {
   getHotelsByPlace,
   createHotel
-} = require('../controllers/hotelController');
+} = require('../controllers/HotelController');  
 const { protect, authorize } = require('../middleware/auth');
 
 const router = express.Router();
