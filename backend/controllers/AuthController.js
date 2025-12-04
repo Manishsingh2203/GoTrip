@@ -40,19 +40,22 @@ const generateAndSetTokens = (user, res) => {
   );
 
   // Set HttpOnly cookies
-  res.cookie('accessToken', accessToken, {
-    httpOnly: true,
-    secure: process.env.NODE_ENV === 'production',
-    sameSite: 'strict',
-    maxAge: 7 * 24 * 60 * 60 * 1000 // 7 days
-  });
+  res.cookie("accessToken", accessToken, {
+  httpOnly: true,
+  secure: true,            // ❗ MUST in production (Render uses HTTPS)
+  sameSite: "none",        // ❗ REQUIRED for Vercel → Render cookies
+  path: "/",               
+  maxAge: 7 * 24 * 60 * 60 * 1000
+});
 
-  res.cookie('refreshToken', refreshToken, {
-    httpOnly: true,
-    secure: process.env.NODE_ENV === 'production',
-    sameSite: 'strict',
-    maxAge: 30 * 24 * 60 * 60 * 1000 // 30 days
-  });
+res.cookie("refreshToken", refreshToken, {
+  httpOnly: true,
+  secure: true,
+  sameSite: "none",
+  path: "/",
+  maxAge: 30 * 24 * 60 * 60 * 1000
+});
+
 
   return { accessToken, refreshToken };
 };
