@@ -34,7 +34,7 @@ export default function HotelsSearch() {
   const [checkout, setCheckout] = useState(location.state?.checkout || "");
   const [guests, setGuests] = useState(location.state?.guests || "2");
   const [rooms, setRooms] = useState(location.state?.rooms || "1");
-
+  
   const [loading, setLoading] = useState(false);
   const [hotels, setHotels] = useState([]);
   const [error, setError] = useState("");
@@ -67,7 +67,7 @@ export default function HotelsSearch() {
   }, [hotels]);
 
   const toggleAmenity = (a) => {
-    setSelectedAmenities((prev) =>
+    setSelectedAmenities((prev) => 
       prev.includes(a) ? prev.filter(x => x !== a) : [...prev, a]
     );
   };
@@ -124,11 +124,12 @@ export default function HotelsSearch() {
   };
 
   useEffect(() => {
-    if (location.state?.city && location.state?.checkin && location.state?.checkout) {
+    // If we arrived here from Home with pre-filled data,
+    // auto-run the search once so the user immediately sees results.
+    if (location.state && city && checkin && checkout) {
       searchHotels(false);
     }
-  }, []);
-
+  }, [location.state, city, checkin, checkout]);
 
   // Filter and sort logic
   const filteredHotels = useMemo(() => {
@@ -136,12 +137,12 @@ export default function HotelsSearch() {
       if (ratingMin && Number(h.rating) < Number(ratingMin)) return false;
       if (onlyBreakfast && !(h.amenities || []).some(a => /breakfast/i.test(a))) return false;
       if (onlyFreeCancel && !h.free_cancellation) return false;
-
+      
       const p = Number(h.price_per_night) || 0;
       if (p < priceRange[0] || p > priceRange[1]) return false;
-
+      
       if (selectedAmenities.length) {
-        const hasAll = selectedAmenities.every(sa =>
+        const hasAll = selectedAmenities.every(sa => 
           (h.amenities || []).some(a => a.toLowerCase() === sa.toLowerCase())
         );
         if (!hasAll) return false;
@@ -161,8 +162,8 @@ export default function HotelsSearch() {
         list.sort((a, b) => (b.rating || 0) - (a.rating || 0));
         break;
       default:
-        list.sort((a, b) =>
-          (b.recommended ? 1 : 0) - (a.recommended ? 1 : 0) ||
+        list.sort((a, b) => 
+          (b.recommended ? 1 : 0) - (a.recommended ? 1 : 0) || 
           (a.price_per_night || 0) - (b.price_per_night || 0)
         );
     }
@@ -176,7 +177,7 @@ export default function HotelsSearch() {
         <div className="max-w-7xl mx-auto px-4 py-4">
           <div className="flex items-center gap-3">
             {/* Back button */}
-            <button
+            <button 
               onClick={() => navigate(-1)}
               className="flex items-center gap-2 text-[#767676] hover:text-[#222222] transition-all duration-300"
             >
@@ -234,7 +235,7 @@ export default function HotelsSearch() {
                 className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-xl focus:border-[#1e599e] focus:ring-2 focus:ring-[#1e599e]/20 transition-all duration-300"
               />
             </div>
-
+            
             <div className="relative">
               <Calendar className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[#1e599e]" />
               <input
@@ -244,7 +245,7 @@ export default function HotelsSearch() {
                 className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-xl focus:border-[#1e599e] focus:ring-2 focus:ring-[#1e599e]/20 transition-all duration-300"
               />
             </div>
-
+            
             <div className="relative">
               <Calendar className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[#1e599e]" />
               <input
@@ -254,7 +255,7 @@ export default function HotelsSearch() {
                 className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-xl focus:border-[#1e599e] focus:ring-2 focus:ring-[#1e599e]/20 transition-all duration-300"
               />
             </div>
-
+            
             <div className="relative">
               <Users className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[#1e599e]" />
               <select
@@ -269,7 +270,7 @@ export default function HotelsSearch() {
               </select>
               <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[#1e599e]" />
             </div>
-
+            
             <button
               onClick={() => searchHotels(false)}
               className="bg-[#0A2F5A] text-white py-3 rounded-xl font-semibold hover:bg-[#0A2F5A] hover:shadow-lg transition-all duration-300 shadow-md"
@@ -396,7 +397,7 @@ export default function HotelsSearch() {
                     {checkin} to {checkout} • {guests} Guest{guests > 1 ? 's' : ''} • {rooms} Room{rooms > 1 ? 's' : ''}
                   </p>
                 </div>
-
+                
                 <div className="flex items-center gap-3">
                   <select
                     value={sortBy}
@@ -449,7 +450,7 @@ export default function HotelsSearch() {
                             className="h-full w-full rounded-xl object-cover  shadow-sm"
                             style={{ filter: "hue-rotate(200deg) saturate(200%)" }}
                           />
-
+                         
                         </div>
 
                         {/* Hotel Details */}

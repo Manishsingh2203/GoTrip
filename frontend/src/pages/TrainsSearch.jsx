@@ -28,7 +28,7 @@ export default function TrainsSearch() {
   const [date, setDate] = useState(location.state?.date || "");
   const [passengers, setPassengers] = useState(location.state?.passengers || "1");
   const [classType, setClassType] = useState(location.state?.classType || "any");
-
+  
   const [loading, setLoading] = useState(false);
   const [trains, setTrains] = useState([]);
   const [error, setError] = useState("");
@@ -74,11 +74,11 @@ export default function TrainsSearch() {
           delay: train.delay || "On Time"
         }));
         setTrains(normalized);
-
-        const allPrices = normalized.flatMap(t =>
+        
+        const allPrices = normalized.flatMap(t => 
           t.classes.map(c => Number(c.price_in_INR) || 0)
         ).filter(p => p > 0);
-
+        
         if (allPrices.length) {
           const min = Math.min(...allPrices);
           const max = Math.max(...allPrices);
@@ -95,11 +95,12 @@ export default function TrainsSearch() {
   };
 
   useEffect(() => {
-    if (location.state?.from && location.state?.to && location.state?.date) {
+    // If we arrived here from Home with pre-filled data,
+    // auto-run the search once so the user immediately sees results.
+    if (location.state && from && to && date) {
       searchTrains(false);
     }
-  }, []); // 🔥 EMPTY DEPENDENCY → run only 1 time
-
+  }, [location.state, from, to, date]);
 
   // Filter and sort trains
   const filteredTrains = useMemo(() => {
@@ -147,60 +148,60 @@ export default function TrainsSearch() {
 
   return (
     <div className="min-h-screen bg-[#F7F7F7] overflow-x-hidden">
-      <header className="bg-white border-b border-gray-200 shadow-sm">
-        <div className="max-w-7xl mx-auto px-4 py-4">
-          <div className="flex items-center gap-3">
+     <header className="bg-white border-b border-gray-200 shadow-sm">
+  <div className="max-w-7xl mx-auto px-4 py-4">
+    <div className="flex items-center gap-3">
+      
+      {/* Back Button */}
+      <button 
+        onClick={() => navigate(-1)}
+        className="flex items-center gap-2 text-[#767676] hover:text-[#222222] transition-colors"
+      >
+        <ArrowLeft className="h-5 w-5" />
+        Back
+      </button>
 
-            {/* Back Button */}
-            <button
-              onClick={() => navigate(-1)}
-              className="flex items-center gap-2 text-[#767676] hover:text-[#222222] transition-colors"
-            >
-              <ArrowLeft className="h-5 w-5" />
-              Back
-            </button>
+      {/* Train Icon */}
+      <Train className="h-6 w-6 text-[#1e599e]" /> 
 
-            {/* Train Icon */}
-            <Train className="h-6 w-6 text-[#1e599e]" />
-
-            <div>
-              <h1 className="text-xl font-semibold text-[#222222]">Trains</h1>
-              <p className="text-sm text-[#767676]">Find your perfect journey</p>
-            </div>
-
-          </div>
-        </div>
-      </header>
-
-
-      {/* FULL WIDTH TRAIN SHOWCASE VIDEO */}
-      <div className="w-full max-w-7xl mx-auto px-4 py-4">
-        <h2 className="text-xl font-semibold text-[#222222] mb-3">
-          Experience India's Best Train Journeys
-        </h2>
-
-        <div className="relative w-full h-56 sm:h-96 md:h-[420px] lg:h-[480px] bg-black rounded-xl overflow-hidden shadow-lg group">
-          <video
-            src="/video/train-journey.mp4"
-            autoPlay
-            loop
-            muted
-            playsInline
-            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-          />
-
-          {/* Title */}
-          <div className="absolute bottom-4 left-4 md:left-6 text-[#ffffff] text-shadow: 0 2px 4px rgba(0,0,0,0.8);
- text-lg sm:text-xl md:text-2xl font-semibold drop-shadow-2xl">
-            Royal • Scenic • Comfortable
-          </div>
-
-          {/* Gradient */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
-        </div>
+      <div>
+        <h1 className="text-xl font-semibold text-[#222222]">Trains</h1>
+        <p className="text-sm text-[#767676]">Find your perfect journey</p>
       </div>
 
+    </div>
+  </div>
+</header>
 
+
+{/* FULL WIDTH TRAIN SHOWCASE VIDEO */}
+<div className="w-full max-w-7xl mx-auto px-4 py-4">
+  <h2 className="text-xl font-semibold text-[#222222] mb-3">
+    Experience India's Best Train Journeys
+  </h2>
+
+   <div className="relative w-full h-56 sm:h-96 md:h-[420px] lg:h-[480px] bg-black rounded-xl overflow-hidden shadow-lg group">
+    <video
+      src="/video/train-journey.mp4"
+      autoPlay
+      loop
+      muted
+      playsInline
+      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+    />
+
+    {/* Title */}
+    <div className="absolute bottom-4 left-4 md:left-6 text-[#ffffff] text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+ text-lg sm:text-xl md:text-2xl font-semibold drop-shadow-2xl">
+      Royal • Scenic • Comfortable
+    </div>
+
+    {/* Gradient */}
+    <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
+  </div>
+</div>
+
+ 
 
 
       {/* Search Bar */}
@@ -216,7 +217,7 @@ export default function TrainsSearch() {
                 className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:border-[#0CA9A5] focus:ring-1 focus:ring-[#0CA9A5]"
               />
             </div>
-
+            
             <div className="relative">
               <MapPin className="absolute left-3 top-3 h-4 w-4 text-[#767676]" />
               <input
@@ -226,7 +227,7 @@ export default function TrainsSearch() {
                 className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:border-[#0CA9A5] focus:ring-1 focus:ring-[#0CA9A5]"
               />
             </div>
-
+            
             <div className="relative">
               <Calendar className="absolute left-3 top-3 h-4 w-4 text-[#767676]" />
               <input
@@ -236,7 +237,7 @@ export default function TrainsSearch() {
                 className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:border-[#0CA9A5] focus:ring-1 focus:ring-[#0CA9A5]"
               />
             </div>
-
+            
             <div className="relative">
               <Users className="absolute left-3 top-3 h-4 w-4 text-[#767676]" />
               <select
@@ -251,7 +252,7 @@ export default function TrainsSearch() {
               </select>
               <ChevronDown className="absolute right-3 top-3 h-4 w-4 text-[#767676]" />
             </div>
-
+            
             <button
               onClick={() => searchTrains(false)}
               className="bg-[#0A2F5A] text-white py-2 rounded-lg font-medium hover:bg-[#0A2F5A] transition-colors"
@@ -346,7 +347,7 @@ export default function TrainsSearch() {
                     {date} • {passengers} Passenger{passengers > 1 ? 's' : ''}
                   </p>
                 </div>
-
+                
                 <div className="flex items-center gap-3">
                   <select
                     value={sortBy}
@@ -386,8 +387,9 @@ export default function TrainsSearch() {
                               <h3 className="font-semibold text-[#222222]">{train.train_name}</h3>
                               <p className="text-[#767676] text-sm">{train.train_number} • {train.train_type}</p>
                             </div>
-                            <div className={`text-xs px-2 py-1 rounded ${train.delay === "On Time" ? "bg-green-100 text-green-800" : "bg-red-100 text-red-800"
-                              }`}>
+                            <div className={`text-xs px-2 py-1 rounded ${
+                              train.delay === "On Time" ? "bg-green-100 text-green-800" : "bg-red-100 text-red-800"
+                            }`}>
                               {train.delay}
                             </div>
                           </div>
@@ -398,7 +400,7 @@ export default function TrainsSearch() {
                               <div className="text-lg font-bold text-[#222222]">{train.departure_time}</div>
                               <div className="text-[#767676] text-sm">{train.from_station}</div>
                             </div>
-
+                            
                             <div className="flex-1 px-4 text-center">
                               <div className="flex items-center justify-center gap-2 text-[#767676] mb-1">
                                 <Clock className="h-4 w-4" />
@@ -409,7 +411,7 @@ export default function TrainsSearch() {
                                 <Train className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 h-4 w-4 text-[#1e599e]" />
                               </div>
                             </div>
-
+                            
                             <div className="text-center">
                               <div className="text-lg font-bold text-[#222222]">{train.arrival_time}</div>
                               <div className="text-[#767676] text-sm">{train.to_station}</div>
