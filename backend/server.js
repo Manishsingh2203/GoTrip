@@ -37,17 +37,19 @@ const app = express();
 const allowedOrigins = [
   "http://localhost:3000",
   "http://127.0.0.1:3000",
-  "https://go-trip-six.vercel.app"
-]
+  process.env.FRONTEND_URL   // Vercel URL from env
+];
 
 app.use(cors({
-  origin: function(origin, callback) {
-    // Allow requests with no origin (mobile apps, curl)
+  origin: function (origin, callback) {
+
+    // Allow tools with no origin (curl/postman)
     if (!origin) return callback(null, true);
 
     if (allowedOrigins.includes(origin)) {
       return callback(null, true);
     } else {
+      console.log("❌ Not allowed by CORS:", origin);
       return callback(new Error("Not allowed by CORS: " + origin), false);
     }
   },
@@ -55,6 +57,7 @@ app.use(cors({
   allowedHeaders: ["Content-Type", "Authorization"],
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"]
 }));
+
 
 
 // Security middleware
