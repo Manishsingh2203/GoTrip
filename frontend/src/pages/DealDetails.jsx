@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { MapPin, Star, CheckCircle, Clock, Loader2 } from "lucide-react";
+const API = import.meta.env.VITE_API_URL;
 
 const DealDetails = () => {
   const { slug } = useParams();
@@ -10,9 +11,15 @@ const DealDetails = () => {
 
   const loadDetails = async () => {
     try {
+      /*
       const res = await axios.get(
         `http://localhost:5000/api/ai/deal-details?slug=${slug}`
       );
+*/
+      const res = await axios.get(
+        `${API}/ai/deal-details?slug=${slug}`
+      );
+
 
       // Ensure arrays always exist to prevent UI crashes
       const safeDeal = {

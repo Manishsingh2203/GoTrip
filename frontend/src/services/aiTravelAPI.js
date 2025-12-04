@@ -1,13 +1,13 @@
 import axios from "axios";
 
 const API = axios.create({
-  baseURL: import.meta.env.VITE_BACKEND_URL || "http://localhost:5000",
+  baseURL: import.meta.env.VITE_API_URL || "http://localhost:5000/api",
 });
 
 // FLIGHTS
 export const getAIFlights = async (payload) => {
   const res = await API.post("/ai/flights", payload);
-  return res.data.data; // 👈 new architecture
+  return res.data.data;
 };
 
 // TRAINS

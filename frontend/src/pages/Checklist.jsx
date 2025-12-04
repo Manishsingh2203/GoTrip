@@ -3,6 +3,7 @@ import { Check, Plus, Trash2, Mic, Wand2 } from 'lucide-react';
 import axios from 'axios';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
+const API = import.meta.env.VITE_API_URL;
 
 const Checklist = () => {
   const [lists, setLists] = useState([]);
@@ -33,10 +34,17 @@ const generateAI = async () => {
   try {
     setIsGenerating(true);
 
+    /*
     const res = await axios.post(
       "http://localhost:5000/api/ai/checklist-ai",
       { query: AIQuery }
     );
+*/
+
+  const res = await axios.post(
+  `${API}/ai/checklist-ai`,
+  { query: AIQuery }
+);
 
     const data = res.data;
 

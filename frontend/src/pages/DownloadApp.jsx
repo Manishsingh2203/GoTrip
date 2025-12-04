@@ -23,11 +23,21 @@ const DownloadApp = () => {
     setSubmitting(true);
 
     try {
+      /*
       await fetch("http://localhost:5000/api/notify", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email }),
       });
+      */
+      await fetch(`${API}/notify`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email }),
+      });
+
 
       setSubmitted(true);
       setSubmitting(false);
@@ -108,7 +118,7 @@ const DownloadApp = () => {
             <h2 className="text-2xl font-bold text-[#222222] mb-2">Coming Soon 🚧</h2>
 
             <p className="text-[#767676] text-sm mb-4">
-              Our mobile app is under development.  
+              Our mobile app is under development.
               Enter your email and we'll notify you once it's live!
             </p>
 
@@ -134,11 +144,10 @@ const DownloadApp = () => {
                 <button
                   onClick={submitEmail}
                   disabled={submitting}
-                  className={`w-full text-white py-2 rounded-lg font-semibold transition ${
-                    submitting
+                  className={`w-full text-white py-2 rounded-lg font-semibold transition ${submitting
                       ? "bg-[#767676] cursor-not-allowed"
                       : "bg-[#0CA9A5] hover:bg-[#FF5A5F]"
-                  }`}
+                    }`}
                 >
                   {submitting ? "Submitting..." : "Notify Me"}
                 </button>
@@ -150,7 +159,7 @@ const DownloadApp = () => {
         </div>
       )}
     </>
-    
+
   );
 };
 
