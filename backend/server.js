@@ -124,7 +124,7 @@ app.use("/api/ai", aiDealsRoutes);
 app.use("/api/ai", aiDealDetailsRoutes);
 app.use("/api/ai", require("./routes/aiChecklist"));
 app.use("/api/help", require("./routes/help"));
-
+app.use('/api/ai', aiTravelRoutes);   // NEW FIX
 
 // Health check route
 app.get('/api/health', (req, res) => {
