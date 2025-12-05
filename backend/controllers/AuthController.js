@@ -467,19 +467,32 @@ exports.getMe = async (req, res, next) => {
 
 exports.logout = async (req, res, next) => {
   try {
-    // Clear cookies
-    res.clearCookie('accessToken');
-    res.clearCookie('refreshToken');
+    // ACCESS TOKEN
+    res.clearCookie("accessToken", {
+      httpOnly: true,
+      secure: true,
+      sameSite: "none",
+      path: "/",              // MUST MATCH WHAT YOU SET
+    });
 
-    res.json({
+    // REFRESH TOKEN
+    res.clearCookie("refreshToken", {
+      httpOnly: true,
+      secure: true,
+      sameSite: "none",
+      path: "/",              // MUST MATCH WHAT YOU SET
+    });
+
+    res.status(200).json({
       success: true,
-      message: 'Logged out successfully'
+      message: "Logged out successfully"
     });
 
   } catch (error) {
     next(error);
   }
 };
+
 
 exports.resendOtp = async (req, res, next) => {
   try {

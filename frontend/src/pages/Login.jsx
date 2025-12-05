@@ -231,7 +231,18 @@ const Login = ({ onClose, onSwitchSignup }) => {
                 : "Login with Password"}
             </button>
 
+
             <div className="relative my-8">
+              <div className="absolute inset-0 flex items-center">
+                <div className="w-full border-t border-gray-300"></div>
+              </div>
+              <div className="relative flex justify-center text-sm">
+                <span className="px-2 bg-gray-50 text-gray-500"></span>
+              </div>
+            </div>
+{/*  
+
+<div className="relative my-8">
               <div className="absolute inset-0 flex items-center">
                 <div className="w-full border-t border-gray-300"></div>
               </div>
@@ -239,8 +250,7 @@ const Login = ({ onClose, onSwitchSignup }) => {
                 <span className="px-2 bg-gray-50 text-gray-500">Or continue with</span>
               </div>
             </div>
-
-            {/* GOOGLE LOGIN */}
+            
             <div className="flex justify-center">
               <button
                 onClick={handleGoogle}
@@ -257,7 +267,7 @@ const Login = ({ onClose, onSwitchSignup }) => {
                 <span>Google</span>
               </button>
             </div>
-
+*/}
             <p className="text-center mt-8 text-gray-600">
               Don't have an account?
               <button

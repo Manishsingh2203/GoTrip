@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Smartphone, Download, X, Sparkles } from "lucide-react";
 import TravelChatbot from '../components/chat/TravelChatbot';
-
+const API = import.meta.env.VITE_API_URL;
 const DownloadApp = () => {
   const [loading, setLoading] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
